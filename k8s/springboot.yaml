@@ -1,0 +1,40 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name : spring
+spec:
+  selector:
+    matchLabels:
+      app : spring-mysql
+  template:
+    metadata:
+      labels:
+        app : spring-mysql
+    spec:
+      containers:
+        - name: spring-db
+          image: aryan2311023/spring_mysql:1.0
+          ports:
+            - containerPort: 8080
+          env:
+            - name: MYSQL_URL
+              value: jdbc:mysql://database-svc:3306/sbms
+            - name: MYSQL_USERNAME
+              value: aryan
+            - name: MYSQL_PASSWORD
+              value: aryan123
+
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name : spring-svc
+spec:
+  type: ClusterIP
+  selector:
+    app : spring-mysql
+  ports:
+    - port: 8080
+      targetPort: 8080

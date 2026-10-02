@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: database
+  name: database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: database
+  template:
+    metadata:
+      labels:
+        app: database
+    spec:
+      containers:
+        - image: mysql
+          name: mysql-db
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "8541"
+            - name: MYSQL_DATABASE
+              value: "sbms"
+            - name: MYSQL_USER
+              value: "aryan"
+            - name: MYSQL_PASSWORD
+              value: "aryan123"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: database-svc
+spec:
+  selector:
+    app: database
+  ports:
+    - port: 3306
+      protocol: TCP
+      targetPort: 3306
