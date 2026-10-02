@@ -18,13 +18,20 @@ spec:
             - containerPort: 8080
           env:
             - name: MYSQL_URL
-              value: jdbc:mysql://database-svc:3306/sbms
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-config
+                  key: MY_SQL_ENDPOINT
             - name: MYSQL_USERNAME
-              value: aryan
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_USERNAME
             - name: MYSQL_PASSWORD
-              value: aryan123
-
-
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_PASSWORD
 
 ---
 apiVersion: v1

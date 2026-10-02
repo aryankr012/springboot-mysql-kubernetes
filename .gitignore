@@ -13,8 +13,6 @@ target/
 .springBeans
 .sts4-cache
 
-### K8S ###
-k8s/secret.yaml
 
 ### IntelliJ IDEA ###
 .idea

@@ -1,0 +1,7 @@
+apiVersion : v1
+kind: ConfigMap
+metadata:
+  name : mysql-config
+data:
+  MY_SQL_ENDPOINT : jdbc:mysql://database-svc:3306/sbms
+  MYSQL_DATABASE : sbms
